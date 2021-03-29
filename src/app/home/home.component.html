@@ -1,0 +1,53 @@
+<div class="wrapper mt-3">
+    <h3 class="text-center mb-3">Photo Listing</h3>
+    <div class="container">
+        <div class="row gy-3">
+            <div class="col-lg-2 col-md-4 col-sm-4" *ngFor="let item of data | paginate: { itemsPerPage:6, currentPage: p } ; index as i">
+                <div class="card text-center">
+                    <img src={{item.thumbnailUrl}} class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.title}}</h5>
+                        <p class="card-text">{{item.id}}</p>
+                        <p class="card-text">{{item.url}}</p>             
+                    </div>
+                    <div class="btnmain mb-3">
+                        <button [class.btnStyle]="mypro" type="button" (click)="onAdd(item)"
+                            class="btn btn-primary btn-sm">Compare</button>
+                        <button type="button" (click)="onDelete(i)" class="btn btn-danger btn-sm">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-5">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="5" class="text-center text-uppercase fs-4">Comparison Table</th>
+                          </tr>
+                        <tr>
+                            <th scope="col">Image</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">URL</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let datas of adddedData; index as i">
+                            <th scope="row"><img class="img-fluid" width="30" src={{datas.thumbnailUrl}} /></th>
+                            <td>{{datas.id}}</td>
+                            <td>{{datas.url}}</td>
+                            <td>{{datas.title}}</td>
+                            <td><button type="button" (click)="removeItem(i)"
+                                    class="btn btn-danger btn-sm">Remove</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
